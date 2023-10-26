@@ -1,95 +1,76 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { Fragment } from "react";
+import Box from "@/components/Box";
+import api from "@/utils/__api__/fashion";
+import Navbar from "@/components/navbar/Navbar";
+import Section1 from "@/sections/Section1";
+import Section2 from "@/sections/Section2";
+import Section3 from "@/sections/Section3";
+import Section4 from "@/sections/Section4";
+import Section5 from "@/sections/Section5";
+import Section6 from "@/sections/Section6";
+import Section7 from "@/sections/Section7";
+import Section8 from "@/sections/Section8";
+import Section9 from "@/sections/Section9";
+import Section10 from "@/sections/Section10";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+const FashionTwo = async () => {
+    const blogs = await api.getBlogs();
+    const brands = await api.getBrands();
+    const products = await api.getProducts();
+    const serviceList = await api.getServices();
+    const categories = await api.getCategories();
+    const saleProducts = await api.getSaleProducts();
+    const latestProducts = await api.getLatestProducts();
+    const popularProducts = await api.getPopularProducts();
+    const featureProducts = await api.getFeatureProducts();
+    const bestWeekProducts = await api.getBestWeekProducts();
+    const mainCarouselData = await api.getMainCarouselData();
+  
+    return (
+      <Fragment>
+        {/* NAVBAR AREA */}
+        <Navbar />
+  
+        <Box bg="white">
+          {/* HERO CAROUSEL AREA */}
+          <Section1 data={mainCarouselData} />
+  
+          {/* SERVICES AREA */}
+          <Section2 serviceList={serviceList} />
+  
+          {/* BEST SELLING CATEGORIES AREA */}
+          <Section3 categories={categories} />
+  
+          {/* BEST SELLING PRODUCTS AREA */}
+          <Section4 products={products} />
+  
+          {/* DISCOUNT OFFER BANNERS AREA */}
+          <Section5 />
+  
+          {/* FEATURED PRODUCTS AREA */}
+          <Section6 products={featureProducts} />
+  
+          {/* SUMMER SALE OFFER AREA */}
+          <Section7 />
+  
+          {/* LATEST ARTICLES AREA */}
+          <Section8 blogs={blogs} />
+  
+          {/* CLIENTS CAROUSEL AREA */}
+          <Section9 brands={brands} />
+  
+          {/* SALE, LATEST, POPULAR PRODUCTS AREA */}
+          <Section10
+            saleProducts={saleProducts}
+            latestProducts={latestProducts}
+            popularProducts={popularProducts}
+            bestWeekProducts={bestWeekProducts}
+          />
+        </Box>
+      </Fragment>
+    );
+  };
+  
+  export default FashionTwo;
+  
